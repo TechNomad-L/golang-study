@@ -32,10 +32,10 @@ func main() {
     fmt.Println("大小写互换后:", change(name))
 }
 
-// 判断是不是英文名称
+// 判断是不是英文名称以及是否包含空格
 func isEnglishName(s string) bool {
     for _, char := range s {
-        if char < 'A' || (char > 'Z' && char < 'a') || char > 'z' {
+        if char != ' ' && (char < 'A' || (char > 'Z' && char < 'a') || char > 'z') {
             return false
         }
     }
@@ -46,11 +46,16 @@ func isEnglishName(s string) bool {
 func change(s string) string  {
     result := ""
     for _, char := range s {
+        //小写转大写
         if char >= 'a' && char <= 'z' {
             result += string(char - 32)
-        } else {
+        } else if char >= 'A' && char <= 'Z'{
+        //大写转小写
             result += string(char + 32)
-        } 
+        } else {
+        //如果不是字母就保持原样
+            result += string(char)
+        }
     }
     return result
 }
